@@ -1,4 +1,5 @@
 import Posts from '@/app/blog/posts'
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 export async function fetchPostsList(pageLimit) {
     console.log("fetch")
@@ -22,9 +23,19 @@ export async function fetchPostsList(pageLimit) {
     }
 };
 
+export function usePaginate(pageLimit) {
+    return useQuery({
+      queryKey: ["posts", pageLimit],
+      queryFn: () => fetchPostsList(pageLimit),
+      enabled: !!pageLimit,
+      refetchOnWindowFocus: false,
+      keepPreviousData: true, // Garder les données précédentes en cache
+    });
+  }
+  
 export default async function PostsPage() {
     const nbPost = 10;
     const posts = await fetchPostsList(nbPost);
-    return <Posts nbpost={nbPost} posts={posts} />;
+    return <Posts nbpost={nbPost} initialPosts={posts} />;
 }
 

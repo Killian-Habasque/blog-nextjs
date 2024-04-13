@@ -1,10 +1,8 @@
 "use client";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { usePaginate, fetchPostsList } from "@/app/blog/page";
+import { usePaginate } from "@/app/blog/page";
 
 export default function Posts({ nbpost, initialPosts }) {
-    const queryClient = useQueryClient();
     const [pageLimit, setPageLimit] = useState(nbpost + 10);
     const { status, data, error, isFetching } = usePaginate(pageLimit);
     const [post, setPosts] = useState(initialPosts.data);
@@ -38,16 +36,16 @@ export default function Posts({ nbpost, initialPosts }) {
                     {attributes.title}
                 </p>
             ))}
-            <br />
+            {/* <br />
             <p>Client rendering</p>
-            <br />
+            <br /> */}
             {isFetching ? <span>Fetching...</span> : null}
             {/* {nextPosts.map(({ id, attributes }) => (
                 <p key={id} id={id}>
                     {attributes.title}
                 </p>
             ))} */}
-            <button onClick={paginate}>Load more</button>
+            {!isFetching ? <button onClick={paginate}>Load more</button> : null}
         </div>
     );
 }

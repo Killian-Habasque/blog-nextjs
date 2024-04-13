@@ -1,5 +1,5 @@
 import Posts from '@/app/blog/posts'
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export async function fetchPostsList(pageLimit) {
     console.log("fetch")
@@ -32,7 +32,7 @@ export function usePaginate(pageLimit) {
       keepPreviousData: true, // Garder les données précédentes en cache
     });
   }
-  
+
 export default async function PostsPage() {
     const nbPost = 10;
     const posts = await fetchPostsList(nbPost);

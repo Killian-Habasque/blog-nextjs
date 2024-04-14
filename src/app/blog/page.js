@@ -6,7 +6,7 @@ export async function fetchPostsList(pageLimit) {
     let pagebegin = pageLimit - 10;
     console.log(pagebegin)
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/api/posts?populate=*&sort=createdAt%3Adesc&pagination[start]=${pagebegin}&pagination[limit]=10`, {
+        const response = await fetch(`https://${process.env.NEXT_PUBLIC_API_DOMAIN}/api/posts?populate=*&sort=createdAt%3Adesc&pagination[start]=${pagebegin}&pagination[limit]=10`, {
             headers: {
                 'Authorization': `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
             }

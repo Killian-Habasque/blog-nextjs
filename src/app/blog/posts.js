@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { usePaginate } from "@/app/blog/page";
+import { Card } from "@/components/Card";
 
 export default function Posts({ nbpost, initialPosts }) {
     const [pageLimit, setPageLimit] = useState(nbpost + 10);
@@ -32,20 +33,10 @@ export default function Posts({ nbpost, initialPosts }) {
             <p>Server rendering</p>
             <br />
             {post.map(({ id, attributes }) => (
-                <p key={id} id={id}>
-                    {attributes.title}
-                </p>
+                <Card key={id} slug={"/test"} title={attributes.title} desc={attributes.description} img={attributes.thumbnails.data.attributes} />
             ))}
-            {/* <br />
-            <p>Client rendering</p>
-            <br /> */}
-            {isFetching ? <span>Fetching...</span> : null}
-            {/* {nextPosts.map(({ id, attributes }) => (
-                <p key={id} id={id}>
-                    {attributes.title}
-                </p>
-            ))} */}
-            {!isFetching ? <button onClick={paginate}>Load more</button> : null}
+
+            {!isFetching ? <button onClick={paginate}>Load more</button> : <span>Fetching...</span>}
         </div>
     );
 }

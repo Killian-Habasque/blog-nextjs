@@ -1,41 +1,20 @@
 import Posts from '@/app/blog/posts'
+import { useApi, POPULATE_ALL, SORT_DESC } from '@/hooks/useApi'
 import { useQuery } from '@tanstack/react-query';
 
-export async function fetchPostsList(pageLimit) {
-    console.log("fetch")
-    let pagebegin = pageLimit - 10;
-    console.log(pagebegin)
-    try {
-        const response = await fetch(`https://${process.env.NEXT_PUBLIC_API_DOMAIN}/api/posts?populate=*&sort=createdAt%3Adesc&pagination[start]=${pagebegin}&pagination[limit]=10`, {
-            headers: {
-                'Authorization': `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch data');
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        throw new Error(`An error occurred: ${error.message}`);
-    }
-};
-
-export function usePaginate(pageLimit) {
+export function fetchPosts(pageLimit) {
     return useQuery({
       queryKey: ["posts", pageLimit],
-      queryFn: () => fetchPostsList(pageLimit),
+      queryFn: () => useApi(`/posts?${POPULATE_ALL}&${SORT_DESC}&pagination[start]=${pageLimit}&pagination[limit]=10`),
       enabled: !!pageLimit,
       refetchOnWindowFocus: false,
-      keepPreviousData: true, // Garder les données précédentes en cache
+      keepPreviousData: true,
     });
   }
 
 export default async function PostsPage() {
     const nbPost = 10;
-    const posts = await fetchPostsList(nbPost);
-    return <Posts nbpost={nbPost} initialPosts={posts} />;
+    const posts = await useApi(`/posts?${POPULATE_ALL}&${SORT_DESC}&pagination[start]=0&pagination[limit]=10`);
+    return <Posts nbpost={nbPost} initialPosts={posts.data} />;
 }
 

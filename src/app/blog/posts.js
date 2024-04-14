@@ -15,7 +15,7 @@ export default function Posts({ nbpost, initialPosts }) {
     };
 
     return (
-        <div>
+        <>
             <br />
             <p>Page blog</p>
             <br />
@@ -23,6 +23,6 @@ export default function Posts({ nbpost, initialPosts }) {
                 <Card key={id} slug={attributes.slug} title={attributes.title} desc={attributes.description} img={attributes.thumbnails.data.attributes} />
             ))}
             {!isFetching ? <button onClick={paginate}>Load more</button> : <span>Loading...</span>}
-        </div>
+        </>
     );
 }

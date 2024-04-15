@@ -16,9 +16,7 @@ export default function Posts({ nbpost, initialPosts }) {
 
     return (
         <main>
-            <br />
-            <p>Page blog</p>
-            <br />
+            <h1>Blog</h1>
             {post.map(({ id, attributes }) => (
                 <Card key={id} slug={attributes.slug} title={attributes.title} desc={attributes.description} img={attributes.thumbnails.data.attributes} />
             ))}

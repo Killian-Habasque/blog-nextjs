@@ -1,23 +1,13 @@
 "use client";
 import ComponentAdapter from "@/hooks/componentAdapter";
 
-export default function Post({ content }) {
-  console.log(content)
-    return (
-        <main>
-            <br />
-            <p>Page blog</p>
-            <br />
-            {
-              content.map((element) => (
-                <>
-                {console.log(element)}
-
-                 <ComponentAdapter key={element.__component + "-" + element.id} data={element} component={element.__component} />
-                </>
-              ))
-            }
-
-        </main>
-    );
+export default function Post({ post, content }) {
+  return (
+    <main>
+      <h1>{post.title}</h1>
+      {content.map((element) => (
+        <ComponentAdapter key={element.__component + "-" + element.id} data={element} component={element.__component} />
+      ))}
+    </main>
+  );
 }

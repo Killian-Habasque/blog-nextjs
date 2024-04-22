@@ -3,12 +3,11 @@ import { useState } from "react";
 import { fetchPosts } from "@/app/blog/page";
 import { Card } from "@/components/Card";
 
-export default function Posts({ nbpost, initialPosts }) {
+export default function Posts({ slug, nbpost, initialPosts }) {
     const [pageLimit, setPageLimit] = useState(nbpost);
     const [post, setPosts] = useState(initialPosts);
+    const { status, data, error, isFetching } = fetchPosts(pageLimit, slug);
 
-    const { status, data, error, isFetching } = fetchPosts(pageLimit);
- 
     const paginate = async () => {
         setPageLimit(pageLimit + 10);
         setPosts([...post, ...data.data])

@@ -20,9 +20,7 @@ export default async function PostsPage({category = ''}) {
     const posts = await useApi(`/posts?${POPULATE_ALL}&${SORT_DESC}${categoryExist}&pagination[start]=0&pagination[limit]=10`);
     const categories = await useApi(`/categories`);
 
-    // const categoryData = categories.data.find(cat => cat.attributes.slug === slug);
-
-    if (posts.data.length == 0) {
+    if (posts && posts.data.length == 0) {
         console.log(posts.data.length)
 		return notFound()
 	}

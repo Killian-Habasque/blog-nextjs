@@ -1,17 +1,20 @@
 "use client";
-import { useState } from "react";
-import { fetchPosts } from "@/app/blog/page";
-import { Card } from "@/components/Card";
-import Link from "next/link"
+import { useState } from 'react';
+import { fetchPosts } from '@/app/blog/page';
+import { Card } from '@/components/Card';
+import Link from 'next/link';
 
-export default function Posts({ category, nbpost, initialPosts, categories }) {
-    const [pageLimit, setPageLimit] = useState(nbpost);
-    const [post, setPosts] = useState(initialPosts);
-    const { status, data, error, isFetching } = fetchPosts(pageLimit, category);
+export default function Posts({ category, initialPosts, categories }) {
+    const [postLimit, setPostLimit] = useState(10);
+    const [posts, setPosts] = useState(initialPosts);
+
+    const { data, isFetching } = fetchPosts(postLimit, category);
 
     const paginate = async () => {
-        setPageLimit(pageLimit + 10);
-        setPosts([...post, ...data.data])
+        if (data && data.meta.pagination.total > postLimit) {
+            setPostLimit(postLimit + 10);
+            setPosts([...posts, ...data.data]);
+        }
     };
 
     return (
@@ -19,18 +22,20 @@ export default function Posts({ category, nbpost, initialPosts, categories }) {
             <h1>Blog</h1>
 
             {categories.map(({ id, attributes }) => (
-                <Link
-                    key={id}
-                    href={`/blog/categorie/${attributes.slug}`}
-                // className={currentCategory === attributes.slug ? "active" : ""}
-                >
-                    <span key={id} className="btn-link">{attributes.name}</span>{"  "}
+                <Link key={id} href={`/blog/categorie/${attributes.slug}`}>
+                    <span className="btn-link">{attributes.name}</span>{"  "}
                 </Link>
             ))}
-            {post.map(({ id, attributes }) => (
+
+            {posts.map(({ id, attributes }) => (
                 <Card key={id} slug={attributes.slug} title={attributes.title} desc={attributes.description} img={attributes.thumbnails.data.attributes} />
             ))}
-            {!isFetching ? <button onClick={paginate}>Load more</button> : <span>Loading...</span>}
+
+            {(isFetching ? <span>Loading more...</span> : '')}
+            {!isFetching && posts.length < data.meta.pagination.total ? (
+                <button onClick={paginate}>Load more</button>
+            ) : ''}
+
         </main>
     );
 }

@@ -4,6 +4,7 @@ import {
     Provider
 } from '@/app/blog/provider'
 const inter = Inter({ subsets: ["latin"] });
+import '../../styles/globals.css';
 
 // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
 export const metadata = {

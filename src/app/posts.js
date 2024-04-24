@@ -21,13 +21,13 @@ export default function Posts({ category, initialPosts, categories }) {
         <main className="container mx-auto p-4 max-w-screen-lg">
             <h1 className="text-2xl font-bold mb-4">Blog</h1>
 
-            <div className="flex flex-wrap -mx-2 mb-4">
+            <div className="flex flex-wrap -mx-1 mb-4">
                 <Link href={`/`}>
-                    <span className={`btn-link mx-2 px-2 py-1 rounded ${!category ? 'bg-blue-500 text-white' : ''}`}> Tout</span>
+                    <span className={`btn-link mx-1 px-2 py-1 rounded ${!category ? 'bg-blue-500 text-white' : ''}`}> Tout</span>
                 </Link>
                 {categories.map(({ id, attributes }) => (
                     <Link key={id} href={`/categorie/${attributes.slug}`} >
-                        <span className={`btn-link mx-2 px-2 py-1 rounded ${category === attributes.slug ? 'bg-blue-500 text-white' : ''}`}>{attributes.name}</span>
+                        <span className={`btn-link mx-1 px-2 py-1 rounded ${category === attributes.slug ? 'bg-blue-500 text-white' : ''}`}>{attributes.name}</span>
                     </Link>
                 ))}
             </div>

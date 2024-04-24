@@ -1,4 +1,3 @@
-
 import { Inter } from "next/font/google"
 import {
     Provider
@@ -37,7 +36,6 @@ export default function RootLayout({ children }) {
                         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                     />
                 </body>
-
             </html>
         </Provider>
     );

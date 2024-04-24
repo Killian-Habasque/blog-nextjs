@@ -1,11 +1,11 @@
 import PostsPage from '@/app/blog/page'
-import { useApi } from '@/hooks/useApi'
+import { fetchApi } from '@/hooks/useApi'
 import { notFound } from 'next/navigation'
 
 export async function generateMetadata({ params, searchParams }, parent) {
     const slug = params.slug
 
-    const categories = await useApi(`/categories`)
+    const categories = await fetchApi(`/categories`)
 
     const categoryData = categories.data.find(cat => cat.attributes.slug === slug);
 

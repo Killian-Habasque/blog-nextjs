@@ -1,10 +1,10 @@
 import Post from '@/app/article/[slug]/post'
-import { useApi, POPULATE_ALL } from '@/hooks/useApi'
+import { fetchApi, POPULATE_ALL } from '@/hooks/useApi'
 
 export async function generateMetadata({ params, searchParams }, parent) {
     const slug = params.slug
    
-    const product = await useApi(`/posts/${slug}?${POPULATE_ALL}`)
+    const product = await fetchApi(`/posts/${slug}?${POPULATE_ALL}`)
     // optionally access and extend (rather than replace) parent metadata
     // const previousImages = (await parent).openGraph?.images || []
    console.log(product)
@@ -18,7 +18,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
   
 export default async function PostPage({ params }) {
     const slug = params.slug;
-    const post = await useApi(`/posts/${slug}?${POPULATE_ALL}`)
-    const content = await useApi(`/posts/${slug}?populate[content][populate]=*`);
+    const post = await fetchApi(`/posts/${slug}?${POPULATE_ALL}`)
+    const content = await fetchApi(`/posts/${slug}?populate[content][populate]=*`);
     return <Post post={post.data.attributes} content={content.data.attributes.content}/>;
 }

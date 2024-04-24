@@ -1,6 +1,6 @@
 "use client";
 import { useState } from 'react';
-import { fetchPosts } from '@/app/blog/page';
+import { usePostsQuery } from '@/app/blog/page';
 import { Card } from '@/components/Card';
 import Link from 'next/link';
 
@@ -8,7 +8,7 @@ export default function Posts({ category, initialPosts, categories }) {
     const [postLimit, setPostLimit] = useState(10);
     const [posts, setPosts] = useState(initialPosts);
 
-    const { data, isFetching } = fetchPosts(postLimit, category);
+    const { data, isFetching } = usePostsQuery(postLimit, category);
 
     const paginate = async () => {
         if (data && data.meta.pagination.total > postLimit) {
@@ -45,7 +45,6 @@ export default function Posts({ category, initialPosts, categories }) {
             </div>
 
             <div className="mt-4 flex flex-col items-center">
-                {isFetching ? <span className="block text-center mb-4">Loading more...</span> : ''}
                 {!isFetching && posts.length < data.meta.pagination.total ? (
                     <button
                         onClick={paginate}

@@ -1,7 +1,7 @@
 export const POPULATE_ALL = 'populate=*'
 export const SORT_DESC = 'sort=createdAt%3Adesc'
 
-export async function useApi(url) {
+export async function fetchApi(url) {
     try {
         const response = await fetch(`https://${process.env.NEXT_PUBLIC_API_DOMAIN}/api${url}`, {
             headers: {

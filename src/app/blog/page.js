@@ -19,7 +19,7 @@ export default async function PostsPage({category = ''}) {
     const categoryExist = category ? `&filters[categories][slug]=${category}` : ``;
     const posts = await fetchApi(`/posts?${POPULATE_ALL}&${SORT_DESC}${categoryExist}&pagination[start]=0&pagination[limit]=10`);
     const categories = await fetchApi(`/categories`);
-    console.log(posts.meta)
+
     if (posts && posts.data.length == 0) {
         console.log(posts.data.length)
 		return notFound()

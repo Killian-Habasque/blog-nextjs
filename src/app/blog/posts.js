@@ -21,17 +21,16 @@ export default function Posts({ category, initialPosts, categories }) {
         <main className="container mx-auto p-4 max-w-screen-lg">
             <h1 className="text-2xl font-bold mb-4">Blog</h1>
 
-            <div className="flex flex-wrap -mx-4 mb-4">
+            <div className="flex flex-wrap -mx-2 mb-4">
                 <Link href={`/blog`}>
-                    <span className="btn-link mx-2">Tout</span>
+                    <span className={`btn-link mx-2 px-1 py-1 rounded ${!category ? 'bg-blue-500 text-white' : ''}`}> Tout</span>
                 </Link>
                 {categories.map(({ id, attributes }) => (
-                    <Link key={id} href={`/blog/categorie/${attributes.slug}`}>
-                        <span className="btn-link mx-2">{attributes.name}</span>
+                    <Link key={id} href={`/blog/categorie/${attributes.slug}`} >
+                        <span className={`btn-link mx-2 px-1 py-1 rounded ${category === attributes.slug ? 'bg-blue-500 text-white' : ''}`}>{attributes.name}</span>
                     </Link>
                 ))}
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {posts.map(({ id, attributes }) => (
                     <Card
@@ -40,11 +39,14 @@ export default function Posts({ category, initialPosts, categories }) {
                         title={attributes.title}
                         desc={attributes.description}
                         img={attributes.thumbnails.data.attributes}
+                        bgColor={attributes.background_color.data ? attributes.background_color.data.attributes.hexCode : null}
+                        fitImage={attributes.thumbnailType}
                     />
                 ))}
             </div>
 
             <div className="mt-4 flex flex-col items-center">
+
                 {!isFetching && posts.length < data.meta.pagination.total ? (
                     <button
                         onClick={paginate}

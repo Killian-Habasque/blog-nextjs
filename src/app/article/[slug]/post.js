@@ -15,7 +15,7 @@ export default function Post({ post, content }) {
   return (
     <main className="container mx-auto p-4 max-w-screen-lg">
       <Link href={`/`} className={`px-4`}>
-        <span className={`btn-link -mx-4 px-1 py-1 rounded bg-blue-500 text-white`}>Retour</span>
+        <span className={`btn-link -mx-4 px-2 py-1 rounded bg-blue-500 text-white`}>Retour</span>
       </Link>
       <article className="prose prose-lg my-4">
         <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
@@ -25,7 +25,7 @@ export default function Post({ post, content }) {
           <p className="mt-2 text-sm text-gray-500">Publié le {new Date(post.publishedAt).toLocaleDateString()}</p>
         </div>
         <div
-          className="relative h-96 mb-6"
+          className="relative h-96 mb-6 rounded-lg overflow-hidden"
           style={post.background_color.data ? { backgroundColor: post.background_color.data.attributes.hexCode } : {}}
         >
           <Image

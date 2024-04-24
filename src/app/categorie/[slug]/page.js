@@ -1,4 +1,4 @@
-import PostsPage from '@/app/blog/page'
+import PostsPage from '@/app/page'
 import { fetchApi } from '@/hooks/useApi'
 import { notFound } from 'next/navigation'
 

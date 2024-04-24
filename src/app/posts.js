@@ -1,6 +1,6 @@
 "use client";
 import { useState } from 'react';
-import { usePostsQuery } from '@/app/blog/page';
+import { usePostsQuery } from '@/app/page';
 import { Card } from '@/components/Card';
 import Link from 'next/link';
 
@@ -22,12 +22,12 @@ export default function Posts({ category, initialPosts, categories }) {
             <h1 className="text-2xl font-bold mb-4">Blog</h1>
 
             <div className="flex flex-wrap -mx-2 mb-4">
-                <Link href={`/blog`}>
-                    <span className={`btn-link mx-2 px-1 py-1 rounded ${!category ? 'bg-blue-500 text-white' : ''}`}> Tout</span>
+                <Link href={`/`}>
+                    <span className={`btn-link mx-2 px-2 py-1 rounded ${!category ? 'bg-blue-500 text-white' : ''}`}> Tout</span>
                 </Link>
                 {categories.map(({ id, attributes }) => (
-                    <Link key={id} href={`/blog/categorie/${attributes.slug}`} >
-                        <span className={`btn-link mx-2 px-1 py-1 rounded ${category === attributes.slug ? 'bg-blue-500 text-white' : ''}`}>{attributes.name}</span>
+                    <Link key={id} href={`/categorie/${attributes.slug}`} >
+                        <span className={`btn-link mx-2 px-2 py-1 rounded ${category === attributes.slug ? 'bg-blue-500 text-white' : ''}`}>{attributes.name}</span>
                     </Link>
                 ))}
             </div>

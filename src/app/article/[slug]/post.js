@@ -10,8 +10,28 @@ export default function Post({ post, content }) {
     objectFitValue = 'contain';
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://doowup.fr/article/${post.slug}`,
+    },
+    headline: post.title,
+    image: `https://${process.env.NEXT_PUBLIC_API_DOMAIN}${post.thumbnails.data.attributes.url}`,
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt,
+    author: {
+      '@type': 'Person',
+      name: 'Doowup',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Doowup',
+    },
+    description: post.description,
+  };
 
-  console.log(post.thumbnails.data)
   return (
     <main className="container mx-auto p-4 max-w-screen-lg">
       <Link href={`/`} className={`px-4`}>
@@ -32,7 +52,7 @@ export default function Post({ post, content }) {
             src={`https://${process.env.NEXT_PUBLIC_API_DOMAIN}${post.thumbnails.data.attributes.url}`}
             alt={post.thumbnails.data.attributes.alternativeText ?? post.thumbnails.data.attributes.name}
             layout="fill"
-            objectFit={objectFitValue} // Utilisation de objectFitValue ici
+            objectFit={objectFitValue}
             objectPosition="center"
             className="rounded-lg"
           />
@@ -42,6 +62,10 @@ export default function Post({ post, content }) {
           <ComponentAdapter key={element.__component + "-" + element.id} data={element} component={element.__component} />
         ))}
       </article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </main>
   );
 }

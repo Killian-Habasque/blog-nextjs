@@ -4,9 +4,7 @@ import { notFound } from 'next/navigation'
 
 export async function generateMetadata({ params, searchParams }, parent) {
     const slug = params.slug
-
     const categories = await fetchApi(`/categories`)
-
     const categoryData = categories.data.find(cat => cat.attributes.slug === slug);
 
     if (!categoryData) {
@@ -19,7 +17,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
             title: categoryData.attributes.name,
             description: categoryData.attributes.description,
             type: 'website',
-            url: `https://yourwebsite.com/categories/${slug}`,
+            url: `https://doowup.fr/categorie/${slug}`,
             site_name: 'Doowup',
         },
         meta: [

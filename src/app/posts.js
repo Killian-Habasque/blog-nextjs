@@ -7,13 +7,34 @@ import Link from 'next/link';
 export default function Posts({ category, initialPosts, categories }) {
     const [postLimit, setPostLimit] = useState(10);
     const [posts, setPosts] = useState(initialPosts);
-
+    let categoryData = null;
     const { data, isFetching } = usePostsQuery(postLimit, category);
 
     const paginate = async () => {
         if (data && data.meta.pagination.total > postLimit) {
             setPostLimit(postLimit + 10);
             setPosts([...posts, ...data.data]);
+        }
+    };
+    category ? categoryData = categories.find(cat => cat.attributes.slug === category) : ''
+
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': categoryData ? `https://doowup.fr/categorie/${category}` : `https://doowup.fr/blog`,
+        },
+        headline: categoryData ? (categoryData.attributes.name) : 'Blog',
+        description: categoryData && categoryData.attributes.description ? categoryData.attributes.description : "Créateurs d'expériences digitales sur mesure. Depuis 2016, Doowup accompagne ses clients PME et Start-Up dans leur stratégie digitale à travers la création de sites internet optimisés pour l'utilisateur et la mise en place de stratégie de référencement.",
+        image: initialPosts ?  `https://${process.env.NEXT_PUBLIC_API_DOMAIN}${initialPosts[0].attributes.thumbnails.data.attributes.url}` : '',
+        author: {
+            '@type': 'Person',
+            name: 'Doowup',
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'Doowup',
         }
     };
 
@@ -56,6 +77,10 @@ export default function Posts({ category, initialPosts, categories }) {
                     </button>
                 ) : ''}
             </div>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
         </main>
     );
 }

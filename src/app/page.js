@@ -14,15 +14,15 @@ export function usePostsQuery(postLimit, slug) {
     });
 }
 
-export default async function PostsPage({category = ''}) {
+export default async function PostsPage({ category = '' }) {
     const nbPost = 10;
     const categoryExist = category ? `&filters[categories][slug]=${category}` : ``;
     const posts = await fetchApi(`/posts?${POPULATE_ALL}&${SORT_DESC}${categoryExist}&pagination[start]=0&pagination[limit]=10`);
     const categories = await fetchApi(`/categories`);
 
     if (posts && posts.data.length == 0) {
-		return notFound()
-	}
+        return notFound()
+    }
 
-    return <Posts category={category} nbpost={nbPost} initialPosts={posts.data} categories={categories.data}/>;
+    return <Posts category={category} nbpost={nbPost} initialPosts={posts.data} categories={categories.data} />;
 }

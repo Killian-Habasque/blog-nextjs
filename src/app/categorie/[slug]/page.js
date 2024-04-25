@@ -11,7 +11,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
         return notFound()
     }
     return {
-        title: categoryData.attributes.name,
+        title: `${categoryData.attributes.name} - Blog | Doowup Agence Digitale`,
         description: categoryData.attributes.description,
         openGraph: {
             title: categoryData.attributes.name,
@@ -19,11 +19,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
             type: 'website',
             url: `https://doowup.fr/categorie/${slug}`,
             site_name: 'Doowup',
-        },
-        meta: [
-            { name: 'robots', content: 'index, follow' },
-            { name: 'author', content: 'Doowup Team' },
-        ],
+        }
     }
 }
 

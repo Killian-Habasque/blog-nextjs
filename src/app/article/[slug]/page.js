@@ -21,11 +21,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
           height: 600,
         },
       ],
-    },
-    meta: [
-      { name: 'robots', content: 'index, follow' },
-      { name: 'author', content: 'Doowup Team' },
-    ],
+    }
   }
 }
 

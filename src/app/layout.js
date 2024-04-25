@@ -4,12 +4,26 @@ import '@/styles/globals.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const metadata = {
+    title: "Blog | Doowup Agence Digitale",
+    description: "Créateurs d'expériences digitales sur mesure. Depuis 2016, Doowup accompagne ses clients PME et Start-Up dans leur stratégie digitale à travers la création de sites internet optimisés pour l'utilisateur et la mise en place de stratégie de référencement.",
+    openGraph: {
+        title: "Blog | Doowup Agence Digitale",
+        description: "Créateurs d'expériences digitales sur mesure. Depuis 2016, Doowup accompagne ses clients PME et Start-Up dans leur stratégie digitale à travers la création de sites internet optimisés pour l'utilisateur et la mise en place de stratégie de référencement.",
+        type: 'website',
+        site_name: 'Doowup',
+    },
+    meta: [
+        { name: 'robots', content: 'index, follow' },
+        { name: 'author', content: 'Doowup Team' },
+    ],
+}
+
 export default function RootLayout({ children }) {
     return (
         <Provider>
             <html lang="fr">
                 <head>
-                    <title>Blog | Doowup Agence Digitale</title>
                     <link rel="manifest" href={"/manifest.json"} />
                     <link rel="manifest" href={"/blog/favicons/manifest.json"} />
                     <link rel="apple-touch-icon" sizes="180x180" href={"/favicons/apple-touch-icon.png"} />

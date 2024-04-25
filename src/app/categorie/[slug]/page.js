@@ -1,5 +1,5 @@
 import PostsPage from '@/app/page'
-import { fetchApi } from '@/hooks/useApi'
+import { fetchApi } from '@/hooks/fetchApi'
 import { notFound } from 'next/navigation'
 
 export async function generateMetadata({ params, searchParams }, parent) {

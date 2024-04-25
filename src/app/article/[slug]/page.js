@@ -1,5 +1,5 @@
 import Post from '@/app/article/[slug]/post'
-import { fetchApi, POPULATE_ALL } from '@/hooks/useApi'
+import { fetchApi, POPULATE_ALL } from '@/hooks/fetchApi'
 
 export async function generateMetadata({ params, searchParams }, parent) {
   const slug = params.slug

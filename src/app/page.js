@@ -1,5 +1,5 @@
 import Posts from '@/app/posts'
-import { fetchApi, POPULATE_ALL, SORT_DESC } from '@/hooks/useApi'
+import { fetchApi, POPULATE_ALL, SORT_DESC } from '@/hooks/fetchApi'
 import { useQuery } from '@tanstack/react-query';
 import { notFound } from 'next/navigation'
 

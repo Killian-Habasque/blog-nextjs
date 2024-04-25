@@ -26,7 +26,7 @@ export default function Posts({ category, initialPosts, categories }) {
             '@type': 'WebPage',
             '@id': categoryData ? `https://doowup.fr/categorie/${category}` : `https://doowup.fr/blog`,
         },
-        headline: categoryData ? (categoryData.attributes.name) : 'Blog',
+        headline: categoryData ? `${categoryData.attributes.name} | Blog | Doowup Agence Digitale` : 'Blog | Doowup Agence Digitale',
         description: categoryData && categoryData.attributes.description ? categoryData.attributes.description : "Créateurs d'expériences digitales sur mesure. Depuis 2016, Doowup accompagne ses clients PME et Start-Up dans leur stratégie digitale à travers la création de sites internet optimisés pour l'utilisateur et la mise en place de stratégie de référencement.",
         image: initialPosts ?  `https://${process.env.NEXT_PUBLIC_API_DOMAIN}${initialPosts[0].attributes.thumbnails.data.attributes.url}` : '',
         author: {

@@ -5,11 +5,6 @@ import Link from 'next/link';
 
 export default function Post({ post, content }) {
 
-  let objectFitValue = 'cover';
-  if (post.thumbnailType === 'illustration transparente') {
-    objectFitValue = 'contain';
-  }
-
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -52,7 +47,7 @@ export default function Post({ post, content }) {
             src={`https://${process.env.NEXT_PUBLIC_API_DOMAIN}${post.thumbnails.data.attributes.url}`}
             alt={post.thumbnails.data.attributes.alternativeText ?? post.thumbnails.data.attributes.name}
             layout="fill"
-            objectFit={objectFitValue}
+            objectFit={ post.thumbnailType === 'illustration transparente' ? 'contain' : 'cover' }
             objectPosition="center"
             className="rounded-lg"
           />

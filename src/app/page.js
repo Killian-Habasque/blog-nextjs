@@ -21,7 +21,6 @@ export default async function PostsPage({category = ''}) {
     const categories = await fetchApi(`/categories`);
 
     if (posts && posts.data.length == 0) {
-        console.log(posts.data.length)
 		return notFound()
 	}
 

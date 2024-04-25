@@ -1,5 +1,5 @@
-import { renderers } from "@/hooks/componentAdapter";
 import ReactMarkdown from 'react-markdown'
+import { renderers } from "@/hooks/markdownAdapter";
 
 function FramedTextBlock(props) {
     const { text, size } = props
@@ -14,5 +14,4 @@ function FramedTextBlock(props) {
         </div >
     )
 }
-
 export default FramedTextBlock

@@ -7,7 +7,6 @@ import Link from 'next/link';
 export default function Posts({ category, initialPosts, categories }) {
     const [postLimit, setPostLimit] = useState(10);
     const [posts, setPosts] = useState(initialPosts);
-    let categoryData = null;
     const { data, isFetching } = usePostsQuery(postLimit, category);
 
     const paginate = async () => {
@@ -16,6 +15,8 @@ export default function Posts({ category, initialPosts, categories }) {
             setPosts([...posts, ...data.data]);
         }
     };
+
+    let categoryData = null;
     category ? categoryData = categories.find(cat => cat.attributes.slug === category) : ''
 
     const jsonLd = {
@@ -67,7 +68,6 @@ export default function Posts({ category, initialPosts, categories }) {
             </div>
 
             <div className="mt-4 flex flex-col items-center">
-
                 {!isFetching && posts.length < data.meta.pagination.total ? (
                     <button
                         onClick={paginate}

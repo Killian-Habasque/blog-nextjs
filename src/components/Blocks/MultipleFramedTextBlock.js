@@ -1,6 +1,5 @@
-import dynamic from 'next/dynamic';
-import {renderers} from "@/hooks/componentAdapter";
-const ReactMarkdown = dynamic(() => import('react-markdown'));
+import ReactMarkdown from 'react-markdown'
+import { renderers } from "@/hooks/markdownAdapter";
 
 function MultipleFramedTextBlock(props) {
     const { framedText } = props;
@@ -17,5 +16,4 @@ function MultipleFramedTextBlock(props) {
         </div>
     );
 }
-
 export default MultipleFramedTextBlock;

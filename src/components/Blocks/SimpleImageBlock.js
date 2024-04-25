@@ -16,7 +16,6 @@ function SimpleImageBlock(props) {
                 />
             </div>
         </div>
-
     )
 }
 

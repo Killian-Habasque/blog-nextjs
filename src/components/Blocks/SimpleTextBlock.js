@@ -1,8 +1,5 @@
-import {renderers} from "@/hooks/componentAdapter";
-import dynamic from 'next/dynamic';
-
-const ReactMarkdown = dynamic(() => import('react-markdown'));
-
+import ReactMarkdown from 'react-markdown'
+import { renderers } from "@/hooks/markdownAdapter";
 
 function SimpleTextBlock(props) {
     const { text } = props
@@ -15,5 +12,4 @@ function SimpleTextBlock(props) {
         </div>
     )
 }
-
 export default SimpleTextBlock

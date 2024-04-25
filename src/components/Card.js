@@ -2,24 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const Card = ({ slug, title, desc, img, bgColor, fitImage }) => {
-
-    let objectFitValue = 'cover';
-    if (fitImage === 'illustration transparente') {
-        objectFitValue = 'contain';
-    }
-
     return (
         <div className="card__container shadow-md rounded-lg overflow-hidden bg-white">
             <Link href={'/article/' + slug}>
-                <div 
-                    className="img__group relative h-60" 
+                <div
+                    className="img__group relative h-60"
                     style={bgColor ? { backgroundColor: bgColor.toLowerCase() } : {}}
                 >
-                    <Image 
-                        src={'https://' + process.env.NEXT_PUBLIC_API_DOMAIN + img.url} 
-                        alt={img.alternativeText ?? "doowup"} 
+                    <Image
+                        src={'https://' + process.env.NEXT_PUBLIC_API_DOMAIN + img.url}
+                        alt={img.alternativeText ?? "doowup"}
                         layout="fill"
-                        objectFit={objectFitValue}
+                        objectFit={fitImage === 'illustration transparente' ? 'contain' : 'cover'}
                         objectPosition="center"
                     />
                 </div>
